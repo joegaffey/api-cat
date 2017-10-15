@@ -25,6 +25,7 @@ function getAPIs(catName) {
     descriptionEl.innerHTML = data.description;
     if(data.image)
       catImgEl.src = data.image;
+    apisListEl.innerHTML = '';
     data.apis.forEach(function(data) {
       var apiEl = document.createElement('li');
       apiEl.innerHTML = `<img class="iconImg" src="${data.image ? `${data.image}` : `https://cdn.glitch.com/a81e82dc-e9a4-4051-a0be-7e79d5716e3f%2FapiIcon.png?1508077598625`}">
@@ -37,6 +38,10 @@ function getAPIs(catName) {
       apisListEl.appendChild(apiEl);
     }); 
   });  
+}
+
+function getSelectedAPI() {
+  getAPIs(catSelectEl.options[catSelectEl.selectedIndex].value);
 }
 
 function exportAPIs() {
