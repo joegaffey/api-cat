@@ -42,6 +42,8 @@ function getAPIs(catName) {
 
 function getSelectedAPI() {
   getAPIs(catSelectEl.options[catSelectEl.selectedIndex].value);
+  //Hackity hack
+  location.reload();
 }
 
 function exportAPIs() {
