@@ -1,2 +1,1 @@
-# api-cat
-Basic API catalogue based on APIs.json.
+Basic API catalogue based on [APIs.json](http://apisjson.org/format.html).

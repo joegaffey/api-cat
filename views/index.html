@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>API Cat</title>
+    <meta name="description" content="A basic API Catalogue">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/dialog.css">
+  </head>
+  <body>
+    <header>
+      <h1 class="title">API Cat</h1>
+      <p class="description">A basic API catalogue based on <a href="http://apisjson.org/format.html">APIs.json</a>.</p>
+    </header>
+    <main>
+      <button onclick="dialog.showModal()">Add an API</button>
+      <dialog id="dialog">
+        <form id="apiForm">
+          Name:<br>
+          <input id="formName" type="text" name="name" value="">
+          Description:<br>
+          <input id="formDescription" type="text" name="description" value="">
+          Specification URL:<br>
+          <input id="formUrl" type="text" name="baseUrl" value="">
+          Version:<br>
+          <input id="formVersion" type="text" name="version" value="">
+          <br>
+          <input id="submitAPI" type="submit" value="Create">
+        </form>  
+        <button onclick="dialog.close()">Close</button>
+      </dialog> 
+      <section class="apis">
+        <h2>APIs</h2>
+        <ul class="apiList"></ul>
+      </section>      
+    </main>
+    <script src="/client.js"></script>
+  </body>
+</html>
