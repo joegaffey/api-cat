@@ -3,6 +3,7 @@ var titleEl = document.querySelector('.title');
 var descriptionEl = document.querySelector('.description');
 var catImgEl = document.querySelector('#catImg');
 var catSelectEl = document.querySelector('#catSelect');
+var docsFrameEl = document.querySelector('#docs');
 
 
 fetch('catalogs').then(function(response) { 
@@ -32,12 +33,22 @@ function getAPIs(catName) {
                         <strong>${data.name}  ${data.version ? `(${data.version})` : ``}</strong>
                         <p>${data.description}</p>
                         <p>
-                        ${data.baseURL ? `<a href="${data.baseURL}">URL</a> ` : ``}
-                        ${data.humanURL ? `<a href="${data.humanURL}">Docs</a> ` : ``}
+                        ${data.baseURL ? `<a href="javascript:setDocsUrl('${data.baseURL}');">URL</a> ` : ``}
+                        ${data.humanURL ? `<a href="javascript:setDocsUrl('${data.humanURL}');">Docs</a> ` : ``}
                         </p>`;
       apisListEl.appendChild(apiEl);
     }); 
   });  
+}
+
+function setDocsUrl(url) {
+  try {
+    docsFrameEl.src = url;
+  }
+  catch(e) {
+    console.log(e);
+    docsFrameEl.src = 'docs_error.html'
+  }
 }
 
 function getSelectedAPI() {

@@ -22,30 +22,33 @@
       </div>
     </header>
     <main>
-      <button onclick="dialog.showModal()">Add an API</button>
-      <button onclick="exportAPIs()">Export</button>
-      <dialog id="dialog">
-        <form id="apiForm">
-          Name:<br>
-          <input id="formName" type="text" name="name" value="">
-          Description:<br>
-          <textarea id="formDescription" cols="40" rows="4" name="description" value=""></textarea><br>
-          Base URL:<br>
-          <input id="formUrl" type="text" name="baseUrl" value="">
-          Docs URL:<br>
-          <input id="formHumanUrl" type="text" name="baseUrl" value="">
-          Version:<br>
-          <input id="formVersion" type="text" name="version" value="">
-          <br>
-          <button onclick="postAPI()">Create</button>
-          <button onclick="dialog.close()">Close</button>
-        </form>  
-      </dialog> 
       <section class="apis">
         <h2>APIs</h2>
+        <button onclick="dialog.showModal()">Add an API</button>
+        <button onclick="exportAPIs()">Export</button>
         <ul class="apiList"></ul>
       </section>      
+      <section class="apiDocs">
+        <iframe id="docs"></iframe>
+      </section>
     </main>
+    <dialog id="dialog">
+      <form id="apiForm">
+        Name:<br>
+        <input id="formName" type="text" name="name" value="">
+        Description:<br>
+        <textarea id="formDescription" cols="40" rows="4" name="description" value=""></textarea><br>
+        Base URL:<br>
+        <input id="formUrl" type="text" name="baseUrl" value="">
+        Docs URL:<br>
+        <input id="formHumanUrl" type="text" name="baseUrl" value="">
+        Version:<br>
+        <input id="formVersion" type="text" name="version" value="">
+        <br>
+        <button onclick="postAPI()">Create</button>
+        <button onclick="dialog.close()">Close</button>
+      </form>  
+    </dialog> 
     <script src="/client.js"></script>
   </body>
 </html>
