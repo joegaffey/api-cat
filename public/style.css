@@ -12,10 +12,6 @@ h1 {
   color: darkgray;
 }
 
-/* .bold {
-  font-weight: bold;
-} */
-
 p {
   max-width: 600px;
 }
@@ -118,4 +114,27 @@ li {
 li:hover {
   background: #eee;
   cursor: pointer;
+}
+
+.header {
+  width: 100%;
+}
+
+
+.apis {
+  float: left;
+  max-width: 400px;
+}
+
+.apiDocs {
+    position: fixed;
+    width: calc(100% - 420px);
+    height: 100%;
+    left: 420px;
+}
+
+iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
 }

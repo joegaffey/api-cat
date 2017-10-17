@@ -1,45 +1,27 @@
 dialog {
 	position: fixed;
-	top: 50%;
-	left: 50%;
-	right: auto;
+	top: 10%;
+	margin: auto;
 	padding: 30px;
-	transform: perspective(500px) translate(-50%, -50%);
 	background: linear-gradient(to bottom, #FFF, #F4F4F4) #FFF;
 	border: none;
 	border-radius: 3px;
 	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 	text-align: center;
-	transform-origin: 50% 50%;
-	animation: dialog 300ms cubic-bezier(.3,0,.1,1.4) forwards 1;
-	will-change: transform, opacity;
+	animation: dialog 300ms ease forwards 1;
+	will-change: opacity;
 }
 
 @keyframes dialog {
-	from {
-		transform: perspective(500px) translate(-50%, -25%) rotateX(45deg) scale(0.1);
-		opacity: 0;
-	}
+	from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 dialog::backdrop {
 	opacity: 0;
 	will-change: opacity;
 	cursor: no-drop;
-
-	/** option 1: "grey" */
-	/*
   background: rgba(0,0,0,0.3);
-  */
-
-	/** option 2: "checkerboard" */
-  /*
-	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><rect x="0" y="0" width="1" height="1" fill="rgba(255,255,255,0.2)" /><rect x="1" y="1" width="1" height="1" fill="rgba(255,255,255,0.2)" /></svg>') rgba(0,0,0,0.3);
-	background-size: 2px 2px;
-	*/
-	
-	/** option 3: "zoom" */
-	background: radial-gradient(circle at center, rgba(50,50,50,0.5), rgba(0,0,0,0.5));
 	animation: backdrop 500ms ease forwards 1;
 }
 
