@@ -42,8 +42,8 @@ function getApiPString(data) {
           <strong>${data.name}  ${data.version ? `(${data.version})` : ``}</strong>
           <p>${data.description}</p>
           <p>
-          ${data.baseURL ? `<a href="javascript:setDocsUrl('${data.baseURL}');">URL</a> ` : ``}
-          ${data.humanURL ? `<a href="javascript:setDocsUrl('${data.humanURL}');">Docs</a> ` : ``}
+          ${data.baseURL ? `<a href="javascript:window.open('${data.baseURL}');">URL</a> ` : ``}
+          ${data.humanURL ? `<a href="javascript:window.open('${data.humanURL}');">Docs</a> ` : ``}
           </p>`;
 }
 
