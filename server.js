@@ -1,12 +1,12 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var request = require('request');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const request = require('request');
 
 app.use(bodyParser.json()); 
 app.use(express.static('public'));
 
-var cats = [
+const cats = [
   { name: 'apievangelist', url: 'http://apievangelist.com/apis.json'},
   { name: 'fitbit', url: 'http://www.fitbit.com/apis.json'},
   { name: 'trade', url: 'http://developer.trade.gov/apis.json'},
@@ -23,8 +23,7 @@ app.get("/catalogs", function (request, response) {
 });
 
 app.get("/apis/:id", function (request, response) {
-  getAPIs(request.params.id);
-  response.send(apis);
+  getAPIs(request.params.id, response);  
 });
 
 app.post("/apis", function (request, response) {
@@ -34,27 +33,16 @@ app.post("/apis", function (request, response) {
   response.sendStatus(200);
 });
 
-function getAPIs(name) {
-  var url = getURLByName(name);
-  request(url, function (error, response, body) {
+let apis = [];
+
+function getAPIs(name, response1) {
+  let url = cats.filter(cat => cat.name === name)[0].url;
+  request(url, (error, response, body) => {
     apis = JSON.parse(body);    
+    response1.send(apis);
   });
 }
-  
-function getURLByName(name) {
-  var url = null;
-  for (let cat of cats) {
-    if(cat.name === name) {
-      url = cat.url;
-      break;
-    }
-  }  
-  return url;
-}
 
-var apis = [];
-getAPIs(cats[0].name);
-
-var listener = app.listen(process.env.PORT, function () {
+const listener = app.listen(process.env.PORT, function () {
   console.log('API Cat is listening on port ' + listener.address().port);
 });

@@ -1,16 +1,18 @@
-var apisListEl = document.querySelector('.apiList');
-var titleEl = document.querySelector('.title');
-var descriptionEl = document.querySelector('.description');
-var catImgEl = document.querySelector('#catImg');
-var catSelectEl = document.querySelector('#catSelect');
-var docsFrameEl = document.querySelector('#docs');
+const apisListEl = document.querySelector('.apiList');
+const titleEl = document.querySelector('.title');
+const descriptionEl = document.querySelector('.description');
+const catImgEl = document.querySelector('#catImg');
+const catSelectEl = document.querySelector('#catSelect');
+const docsFrameEl = document.querySelector('#docs');
+const dialogEl = document.querySelector('#dialog');
 
+const defaultIconUrl = 'https://cdn.glitch.com/a81e82dc-e9a4-4051-a0be-7e79d5716e3f%2FapiIcon.png?1508077598625';
 
 fetch('catalogs').then(function(response) { 
   return response.json();
 }).then(function(data) {
   data.forEach(function(data) {
-    var optEl = document.createElement('option');
+    let optEl = document.createElement('option');
     optEl.value = data.name;
     optEl.text = data.name;
     catSelectEl.add(optEl);
@@ -28,17 +30,21 @@ function getAPIs(catName) {
       catImgEl.src = data.image;
     apisListEl.innerHTML = '';
     data.apis.forEach(function(data) {
-      var apiEl = document.createElement('li');
-      apiEl.innerHTML = `<img class="iconImg" src="${data.image ? `${data.image}` : `https://cdn.glitch.com/a81e82dc-e9a4-4051-a0be-7e79d5716e3f%2FapiIcon.png?1508077598625`}">
-                        <strong>${data.name}  ${data.version ? `(${data.version})` : ``}</strong>
-                        <p>${data.description}</p>
-                        <p>
-                        ${data.baseURL ? `<a href="javascript:setDocsUrl('${data.baseURL}');">URL</a> ` : ``}
-                        ${data.humanURL ? `<a href="javascript:setDocsUrl('${data.humanURL}');">Docs</a> ` : ``}
-                        </p>`;
+      let apiEl = document.createElement('li');
+      apiEl.innerHTML = getApiPString(data);
       apisListEl.appendChild(apiEl);
     }); 
   });  
+}
+
+function getApiPString(data) {
+  return `<img class="iconImg" src="${data.image ? `${data.image}` : defaultIconUrl}">
+          <strong>${data.name}  ${data.version ? `(${data.version})` : ``}</strong>
+          <p>${data.description}</p>
+          <p>
+          ${data.baseURL ? `<a href="javascript:setDocsUrl('${data.baseURL}');">URL</a> ` : ``}
+          ${data.humanURL ? `<a href="javascript:setDocsUrl('${data.humanURL}');">Docs</a> ` : ``}
+          </p>`;
 }
 
 function setDocsUrl(url) {
@@ -53,8 +59,6 @@ function setDocsUrl(url) {
 
 function getSelectedAPI() {
   getAPIs(catSelectEl.options[catSelectEl.selectedIndex].value);
-  //Hackity hack
-  location.reload();
 }
 
 function exportAPIs() {
@@ -62,9 +66,9 @@ function exportAPIs() {
 }
 
 function postAPI() {
-  var headers = new Headers();
+  const headers = new Headers();
   headers.append('Content-Type', 'application/json');
-  var body = JSON.stringify({
+  const body = JSON.stringify({
     name: document.getElementById('formName').value,
     description: document.getElementById('formDescription').value,
     baseURL: document.getElementById('formUrl').value,
