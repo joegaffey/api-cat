@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const request = require('request');
 
+let apis = [];
+
 app.use(bodyParser.json()); 
 app.use(express.static('public'));
 
@@ -23,23 +25,29 @@ app.get("/catalogs", function (request, response) {
 });
 
 app.get("/apis/:id", function (request, response) {
-  getAPIs(request.params.id, response);  
+  let url = cats.filter(cat => cat.name === request.params.id)[0].url;
+  getAPIs(url, response);  
+});
+
+app.get("/apis", function (request, response) {
+  response.send(apis);
 });
 
 app.post("/apis", function (request, response) {
   console.log(request.method + ' ' + request.path);
-  if(request.body)
-    apis.apis.push(request.body);
-  response.sendStatus(200);
+  if(request.body) {
+    apis.push(request.body);
+    response.sendStatus(200);
+  }
+  else 
+    response.sendStatus(422);
 });
 
-let apis = [];
 
-function getAPIs(name, response1) {
-  let url = cats.filter(cat => cat.name === name)[0].url;
+function getAPIs(url, clientResponse) {  
   request(url, (error, response, body) => {
     apis = JSON.parse(body);    
-    response1.send(apis);
+    clientResponse.send(apis);
   });
 }
 
