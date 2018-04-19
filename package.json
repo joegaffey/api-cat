@@ -12,7 +12,8 @@
   "dependencies": {
     "express": "^4.16.1",
     "body-parser": "^1.18.2",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "express-csp-header": "^2.1.0"
   },
   "engines": {
     "node": "8.x"
