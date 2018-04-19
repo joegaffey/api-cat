@@ -41,9 +41,9 @@ function getApiPString(data) {
   return `<img class="iconImg" src="${data.image ? `${data.image}` : defaultIconUrl}">
           <strong>${data.name}  ${data.version ? `(${data.version})` : ``}</strong>
           <p>${data.description}</p>
-          <p>
-          ${data.baseURL ? `<a href="javascript:window.open('${data.baseURL}');">URL</a> ` : ``}
-          ${data.humanURL ? `<a href="javascript:window.open('${data.humanURL}');">Docs</a> ` : ``}
+          <p class="links">
+          ${data.baseURL ? `Endpoint <a href="javascript:window.open('${data.baseURL}');">${data.baseURL}</a><br/>` : ``}
+          ${data.humanURL ? `<a href="javascript:window.open('${data.humanURL}');">API Docs</a> ` : ``}
           </p>`;
 }
 
@@ -79,5 +79,8 @@ function postAPI() {
     method: "POST",
     headers: headers,
     body: body
+  }).then(() => {
+    getSelectedAPI();
+    dialogEl.close();
   });  
 }

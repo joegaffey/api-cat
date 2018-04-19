@@ -1,12 +1,11 @@
 const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
 const request = require('request');
-
-let apis = [];
-
+const bodyParser = require('body-parser');
+const app = express();
 app.use(bodyParser.json()); 
 app.use(express.static('public'));
+
+let apis = [];
 
 const cats = [
   { name: 'apievangelist', url: 'http://apievangelist.com/apis.json'},
@@ -14,6 +13,10 @@ const cats = [
   { name: 'trade', url: 'http://developer.trade.gov/apis.json'},
   { name: 'plivo', url: 'https://www.plivo.com/apis.json'},
   { name: 'enclout', url: 'http://enclout.com/api/apis.json'},
+  { name: 'acuityscheduling', url: 'https://acuityscheduling.com/apis.json'},
+  { name: 'supermonitoring', url: 'https://www.supermonitoring.com/apis.json'},
+  { name: 'checkmarket', url: 'https://api.checkmarket.com/3/apis.json'},
+  { name: 'onemusicapi', url: 'http://www.onemusicapi.com/apis.json'},
 ];
 
 app.get("/", function (request, response) {
@@ -36,7 +39,7 @@ app.get("/apis", function (request, response) {
 app.post("/apis", function (request, response) {
   console.log(request.method + ' ' + request.path);
   if(request.body) {
-    apis.push(request.body);
+    apis.apis.push(request.body);
     response.sendStatus(200);
   }
   else 
